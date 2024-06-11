@@ -27,5 +27,17 @@ services:
       mc mb minio/media --ignore-existing;
       "
 
+  janusgraph:
+    image: janusgraph/janusgraph
+    restart: always
+    environment:
+      JANUSGRAPH_STORAGE_BACKEND: berkeleyje
+      JANUSGRAPH_CACHE_DB_CACHE: "true"
+    ports:
+      - "8182:8182"
+    volumes:
+      - janusgraph_data:/var/lib/janusgraph
+
 volumes:
   minio_data:
+  janusgraph_data:
